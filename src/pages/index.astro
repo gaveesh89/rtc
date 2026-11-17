@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+import Beat from '../components/Beat.astro';
+import Steps from '../components/Steps.astro';
+import IfThen from '../components/IfThen.astro';
+import Faq from '../components/Faq.astro';
+import CreditCalculator from '../components/CreditCalculator.astro';
+---
+
+<Base
+  audience="renters"
+  title="For people who rent"
+  description="Pay the normal rent and 10% of it is recorded in your name. If you buy the home you rent, it comes off the price."
+>
+  <Beat label="For people who rent">
+    <h1 class="say">You already pay for the home you live in.</h1>
+    <p class="say">
+      <span class="hl">Now some of that can count toward owning it.</span>
+    </p>
+  </Beat>
+
+  <Beat label="The whole idea">
+    <p class="mid">
+      For every £100 of rent you pay, £10 is recorded in your name. If you buy the home you rent, it
+      comes off the price.
+    </p>
+    <p class="after">You pay the normal advertised rent. Nothing extra. No fees to us, ever.</p>
+  </Beat>
+
+  <Beat label="Your journey">
+    <Steps
+      steps={[
+        {
+          when: 'Before you sign',
+          what: 'We show you a personal plan.',
+          why: 'What you would need to buy this home, and roughly when. If buying looks out of reach, we will tell you.',
+        },
+        {
+          when: 'Moving in',
+          what: 'An ordinary tenancy, at the advertised rent.',
+          why: 'Your deposit goes into a government-approved protection scheme, as with any tenancy.',
+        },
+        {
+          when: 'Every month',
+          what: '10% of the rent you paid is added to your credit.',
+          why: 'You can see your balance online at any time, and you get a statement each year.',
+        },
+        {
+          when: 'After 12 months',
+          what: 'You can ask to buy.',
+          why: 'An independent surveyor values the home. Your credit comes off that price.',
+        },
+        {
+          when: 'Buying',
+          what: 'You buy with a normal mortgage.',
+          why: 'Solicitors handle the sale. When it completes, the home is yours.',
+        },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Your numbers">
+    <CreditCalculator />
+    <p class="after">
+      This assumes your rent stays the same. The credit is always 10% of what you actually pay, so
+      it follows your rent up or down. It stops growing after five years.
+    </p>
+  </Beat>
+
+  <Beat label="If life changes">
+    <IfThen
+      rows={[
+        {
+          if: 'You decide to move out',
+          then: 'The credit ends. You have paid normal rent and lost nothing.',
+        },
+        {
+          if: 'Your landlord decides to sell',
+          then: 'You are offered the home first, with your credit taken off.',
+        },
+        {
+          if: 'Your landlord sells to someone else',
+          then: 'Your landlord pays you 25% of your credit in cash.',
+        },
+        {
+          if: 'The home is worth less than when you moved in',
+          then: 'Your landlord may wait before selling. You keep your credit and can ask again each year, for up to two more years.',
+        },
+        { if: 'Something breaks', then: 'Your landlord fixes it, as with any tenancy.' },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Plainly">
+    <ul class="not">
+      <li>It is not savings you can withdraw.</li>
+      <li>It is not part-ownership.</li>
+      <li>It is not a promise of a mortgage.</li>
+      <li>It only works on the home you rent.</li>
+    </ul>
+    <p class="after">
+      Most people will still need some money of their own for a deposit and costs, and a lender will
+      check your income in the usual way. Your credit makes the gap smaller. It does not close it on
+      its own.
+    </p>
+  </Beat>
+
+  <Beat label="How to join">
+    <Steps
+      ordered
+      steps={[
+        {
+          when: '1',
+          what: 'Tell us when you hope to buy and roughly what you earn.',
+          why: 'We only use this to build your plan.',
+        },
+        {
+          when: '2',
+          what: 'Read the two-page key facts sheet.',
+          why: 'Take at least two days. Ask us anything.',
+        },
+        {
+          when: '3',
+          what: 'Pass the usual tenant checks.',
+          why: 'You are not charged for them.',
+        },
+        {
+          when: '4',
+          what: 'Sign the tenancy and the credit agreement, and move in.',
+          why: 'Your credit starts with your first rent payment.',
+        },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Questions people ask">
+    <Faq
+      items={[
+        {
+          q: 'Do I pay more rent for this?',
+          a: 'No. You pay the advertised rent for the home, the same as anyone else would.',
+        },
+        {
+          q: 'Do I have to buy?',
+          a: 'No. Buying is your choice. If you do not expect to buy, an ordinary tenancy elsewhere serves you just as well.',
+        },
+        {
+          q: 'Who decides the price?',
+          a: 'An independent surveyor. Your mortgage lender will also value the home, and its figure may be lower.',
+        },
+        {
+          q: 'Can you help me get a mortgage?',
+          a: 'We do not give mortgage advice. We can introduce you to an independent broker, and we will tell you first if we are paid for doing so.',
+        },
+        {
+          q: 'Can I leave whenever I want?',
+          a: "Yes. Two months' notice, like any tenant.",
+        },
+      ]}
+    />
+  </Beat>
+</Base>

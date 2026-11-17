@@ -1,0 +1,56 @@
+---
+export interface Step {
+  when: string;
+  what: string;
+  why?: string;
+}
+interface Props {
+  steps: Step[];
+  /** Render as a numbered list (for "how to join"). */
+  ordered?: boolean;
+}
+const { steps, ordered = false } = Astro.props;
+const Tag = ordered ? 'ol' : 'ul';
+---
+
+<Tag class="steps">
+  {steps.map((s) => (
+    <li>
+      <span class="when">{s.when}</span>
+      <span class="what">{s.what}</span>
+      {s.why && <span class="why">{s.why}</span>}
+    </li>
+  ))}
+</Tag>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 640px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .when {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--blue);
+    letter-spacing: 0.04em;
+  }
+  .what {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+  .why {
+    color: var(--soft);
+    font-size: 0.98rem;
+  }
+</style>

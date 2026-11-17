@@ -1,0 +1,89 @@
+---
+import { CREDIT_CAP_YEARS, MAX_MONTHLY_RENT, creditAfterYears, formatGBP } from '../lib/credit';
+
+const DEFAULT_RENT = 1500;
+const years = Array.from({ length: CREDIT_CAP_YEARS }, (_, i) => i + 1);
+---
+
+<div class="calc" data-credit-calculator>
+  <label class="rentin" for="rent">
+    My rent is £
+    <input
+      type="number"
+      id="rent"
+      name="rent"
+      value={DEFAULT_RENT}
+      min="0"
+      max={MAX_MONTHLY_RENT}
+      step="50"
+      inputmode="numeric"
+    />{' '}
+    a month
+  </label>
+  <table class="ledger" aria-live="polite">
+    <thead>
+      <tr>
+        <th scope="col">After</th>
+        <th scope="col" class="r">
+          Your credit
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {years.map((y) => (
+        <tr class={y === CREDIT_CAP_YEARS ? 'tot' : undefined}>
+          <td>
+            {y} {y === 1 ? 'year' : 'years'}
+          </td>
+          <td class="r" data-year={y}>
+            {formatGBP(creditAfterYears(DEFAULT_RENT, y))}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  import { creditAfterYears, formatGBP } from '../lib/credit';
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-credit-calculator]')) {
+    const input = root.querySelector<HTMLInputElement>('input');
+    const cells = root.querySelectorAll<HTMLElement>('[data-year]');
+    if (!input) continue;
+    const update = () => {
+      for (const cell of cells) {
+        cell.textContent = formatGBP(
+          creditAfterYears(Number(input.value), Number(cell.dataset.year)),
+        );
+      }
+    };
+    input.addEventListener('input', update);
+    update();
+  }
+</script>
+
+<style>
+  .calc {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .rentin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--display);
+    font-size: 1.25rem;
+  }
+  input {
+    font: 500 1.15rem var(--mono);
+    width: 8ch;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink);
+  }
+</style>

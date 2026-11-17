@@ -1,0 +1,52 @@
+---
+export interface Row {
+  if: string;
+  then: string;
+}
+interface Props {
+  rows: Row[];
+}
+const { rows } = Astro.props;
+---
+
+<dl class="ifthen">
+  {rows.map((r) => (
+    <div>
+      <dt>{r.if}</dt>
+      <dd>{r.then}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .ifthen {
+    display: flex;
+    flex-direction: column;
+    max-width: 680px;
+    margin: 0;
+  }
+  div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 20px;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+  }
+  div:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  dt {
+    font-family: var(--display);
+    font-size: 1.08rem;
+  }
+  dd {
+    margin: 0;
+    color: var(--soft);
+  }
+  @media (max-width: 520px) {
+    div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

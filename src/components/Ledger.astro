@@ -1,0 +1,37 @@
+---
+interface Props {
+  heading: string;
+  rows: [label: string, value: string][];
+  total?: [label: string, value: string];
+  /** Optional header for the value column. */
+  valueHeading?: string;
+}
+const { heading, rows, total, valueHeading = '' } = Astro.props;
+---
+
+<table class="ledger">
+  <thead>
+    <tr>
+      <th scope="col">{heading}</th>
+      <th scope="col" class="r">
+        {valueHeading}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map(([label, value]) => (
+      <tr>
+        <td>{label}</td>
+        <td class="r">{value}</td>
+      </tr>
+    ))}
+  </tbody>
+  {total && (
+    <tfoot>
+      <tr>
+        <td>{total[0]}</td>
+        <td class="r">{total[1]}</td>
+      </tr>
+    </tfoot>
+  )}
+</table>

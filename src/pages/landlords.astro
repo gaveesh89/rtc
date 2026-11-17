@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+import Beat from '../components/Beat.astro';
+import Steps from '../components/Steps.astro';
+import IfThen from '../components/IfThen.astro';
+import Faq from '../components/Faq.astro';
+import Ledger from '../components/Ledger.astro';
+---
+
+<Base
+  audience="landlords"
+  title="For landlords"
+  description="We find you a tenant who wants to buy your home. You keep all the rent, and sell with no estate agent, no viewings and no chain."
+>
+  <Beat label="For landlords">
+    <h1 class="say">One day you will sell.</h1>
+    <p class="say">
+      <span class="hl">What if your buyer already lived there?</span>
+    </p>
+  </Beat>
+
+  <Beat label="The whole idea">
+    <p class="mid">
+      We find you a tenant who wants to buy your home. You keep all the rent. If they buy, 10% of
+      the rent they paid comes off the price.
+    </p>
+    <p class="after">
+      No estate agent, no viewings, no chain and no months standing empty while you sell.
+    </p>
+  </Beat>
+
+  <Beat label="Your journey">
+    <Steps
+      steps={[
+        {
+          when: 'Joining',
+          what: 'We check the home and the paperwork.',
+          why: "Ownership, safety certificates, energy rating and, if you have a mortgage, your lender's consent.",
+        },
+        {
+          when: 'Letting',
+          what: 'We find and reference a tenant who wants to buy.',
+          why: 'You approve them. Our fee is £500.',
+        },
+        {
+          when: 'Every month',
+          what: 'Rent is paid straight to you.',
+          why: 'We keep the credit record. No money leaves your account.',
+        },
+        {
+          when: 'After 12 months',
+          what: 'Your tenant may ask to buy.',
+          why: 'An independent surveyor values the home. The credit comes off that price.',
+        },
+        {
+          when: 'Selling',
+          what: 'Solicitors complete the sale.',
+          why: 'We charge 1% of the price on completion.',
+        },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="An example">
+    <p class="mid">A £320,000 home, let at £1,500 a month. The tenant buys after four years.</p>
+    <Ledger
+      heading="You give"
+      rows={[
+        ['Credit off the price', '£7,200'],
+        ['Our fees in total', '£4,780'],
+      ]}
+      total={['Total', '£11,980']}
+    />
+    <Ledger
+      heading="You typically avoid"
+      rows={[
+        ["Letting agent's tenant-finding fee", '£2,160'],
+        ["Estate agent's fee", '£4,544'],
+        ['Five months empty while selling', '£7,500'],
+      ]}
+      total={['Total', '£14,204']}
+    />
+    <p class="after">
+      About £2,200 in your favour, and a sale with no chain. An illustration only: rent and value
+      are held level, and the typical costs are 2026 market averages. If you already let and sell
+      without agents, your saving is smaller.
+    </p>
+  </Beat>
+
+  <Beat label="What it costs">
+    <IfThen
+      rows={[
+        {
+          if: 'Finding your tenant',
+          then: "£500, once. A typical agent charges 8% to 12% of a year's rent plus VAT.",
+        },
+        { if: 'Keeping the credit record', then: '1.5% of rent collected.' },
+        {
+          if: 'If your tenant buys',
+          then: 'The credit off the price, and 1% of the sale price to us.',
+        },
+        { if: 'If you sell to someone else', then: '25% of the credit, paid to your tenant.' },
+        { if: 'If your tenant leaves by choice', then: 'Nothing. The credit simply ends.' },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Your protections">
+    <div class="pair">
+      <div>
+        <h2 class="h3">You are never forced to sell low</h2>
+        <p class="after">
+          If the home is worth less than when the tenancy began, you may wait. Your tenant keeps the
+          credit and can ask again each year, for up to two more years.
+        </p>
+      </div>
+      <div>
+        <h2 class="h3">The price is set independently</h2>
+        <p class="after">
+          A chartered surveyor values the home at the time of sale. Neither side sets it.
+        </p>
+      </div>
+      <div>
+        <h2 class="h3">The credit has a ceiling</h2>
+        <p class="after">
+          It stops growing after five years, so it never outruns what you save by selling this way.
+        </p>
+      </div>
+      <div>
+        <h2 class="h3">You stay the landlord</h2>
+        <p class="after">Your tenancy, your rent, your decisions. We never hold your money.</p>
+      </div>
+    </div>
+  </Beat>
+
+  <Beat label="What stays the same">
+    <ul class="lines">
+      <li>You are responsible for repairs and safety, as the law requires.</li>
+      <li>Your tenant can leave with two months' notice. No one can promise a minimum stay.</li>
+      <li>You must be registered as a landlord and protect the deposit within 30 days.</li>
+    </ul>
+  </Beat>
+
+  <Beat label="How to join">
+    <Steps
+      ordered
+      steps={[
+        { when: '1', what: 'Send us the address, the rent you expect and when you might sell.' },
+        {
+          when: '2',
+          what: 'If the home is mortgaged, ask your lender about giving your tenant a first chance to buy.',
+        },
+        { when: '3', what: 'Share proof of ownership and your safety and energy certificates.' },
+        {
+          when: '4',
+          what: 'Read and sign our agreement.',
+          why: 'Take your own legal and tax advice first. We do not give either.',
+        },
+        { when: '5', what: 'Approve the tenant we find.' },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Questions landlords ask">
+    <Faq
+      items={[
+        {
+          q: 'Do I lose 10% of my rent each month?',
+          a: 'No. You receive all of it. The credit is a record that only becomes a price reduction if your tenant buys.',
+        },
+        {
+          q: 'Will my tenant get a mortgage?',
+          a: "Not always. Lenders call this a concessionary purchase and many accept it, but your tenant still has to pass the lender's checks and usually needs some savings too.",
+        },
+        {
+          q: 'How is the discount taxed?',
+          a: 'It depends on your circumstances. Please ask your accountant before you join.',
+        },
+        {
+          q: 'Can I still use a managing agent?',
+          a: 'Yes. You do not need one to find the tenant, but you can pay someone to manage the home day to day.',
+        },
+      ]}
+    />
+  </Beat>
+</Base>

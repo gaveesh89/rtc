@@ -1,0 +1,173 @@
+---
+import '../styles/global.css';
+
+export type Audience = 'renters' | 'landlords' | 'investors';
+
+interface Props {
+  title: string;
+  description: string;
+  audience: Audience;
+  /** Keep the page out of search engines (used for the investor page). */
+  noindex?: boolean;
+}
+
+const { title, description, audience, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const fullTitle = `${title} | Rent that counts`;
+
+const doors: { id: Audience; href: string; label: string }[] = [
+  { id: 'renters', href: '/', label: 'I rent' },
+  { id: 'landlords', href: '/landlords', label: 'I own a rental home' },
+  { id: 'investors', href: '/investors', label: 'I invest' },
+];
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f141d" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rent that counts" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <header class="wrap top">
+      <a class="brand" href="/">
+        Rent that <span>counts.</span>
+      </a>
+      <nav aria-label="Choose your guide">
+        <ul class="doors">
+          {doors.map((d) => (
+            <li>
+              <a href={d.href} aria-current={d.id === audience ? 'page' : undefined}>
+                {d.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+
+    <footer class="wrap foot">
+      <p>
+        Rent that counts is a working name. The scheme is in development and its terms are being
+        reviewed by a solicitor, so nothing here is an offer.
+      </p>
+      <p>
+        Figures: English Housing Survey 2024 to 2025 and English Private Landlord Survey 2024
+        (MHCLG); Mortgage Solutions, March 2026, for lender numbers; HomeOwners Alliance and
+        LandlordStudio 2026 averages for agent fees.
+      </p>
+    </footer>
+
+    <script>
+      // Links to the original single-page guide used #landlords / #investors.
+      // Send those visitors to the matching page.
+      const legacy: Record<string, string> = {
+        '#landlords': '/landlords',
+        '#investors': '/investors',
+      };
+      const redirectLegacyHash = () => {
+        const target = legacy[window.location.hash];
+        if (window.location.pathname === '/' && target) window.location.replace(target);
+      };
+      redirectLegacyHash();
+      window.addEventListener('hashchange', redirectLegacyHash);
+    </script>
+  </body>
+</html>
+
+<style>
+  .top {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: max(36px, env(safe-area-inset-top, 0px));
+    padding-bottom: 28px;
+  }
+  .top::after {
+    content: '';
+    border-bottom: 1px solid var(--rule);
+    margin-top: 10px;
+  }
+  .brand {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .brand span {
+    color: var(--blue);
+  }
+  .doors {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .doors a {
+    display: inline-block;
+    font: 400 1rem var(--display);
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1.5px solid var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .doors a:hover {
+    border-color: var(--blue);
+  }
+  .doors a[aria-current='page'] {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--on-blue);
+  }
+  main {
+    padding-bottom: 32px;
+  }
+  .foot {
+    padding-top: 28px;
+    padding-bottom: max(64px, env(safe-area-inset-bottom, 0px));
+    color: var(--soft);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .foot p {
+    margin: 0;
+    max-width: 66ch;
+  }
+  .foot::before {
+    content: '';
+    border-top: 1px solid var(--rule);
+    margin-bottom: 20px;
+  }
+</style>

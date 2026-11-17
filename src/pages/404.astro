@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Beat from '../components/Beat.astro';
+---
+
+<Base audience="renters" title="Page not found" description="This page does not exist." noindex>
+  <Beat label="404">
+    <h1 class="say">We could not find that page.</h1>
+    <p class="after">
+      <a href="/">Go to the guide for renters</a>, or pick a guide above.
+    </p>
+  </Beat>
+</Base>

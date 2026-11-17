@@ -1,0 +1,182 @@
+---
+import Base from '../layouts/Base.astro';
+import Beat from '../components/Beat.astro';
+import Steps from '../components/Steps.astro';
+import IfThen from '../components/IfThen.astro';
+import Stats from '../components/Stats.astro';
+---
+
+<Base
+  audience="investors"
+  title="For investors"
+  description="A platform that connects landlords who plan to sell with tenants who want to buy."
+  noindex
+>
+  <Beat label="For investors">
+    <h1 class="say">Millions of renters want to buy. Thousands of landlords want to sell.</h1>
+    <p class="say">
+      <span class="hl">Often, they already share a front door.</span>
+    </p>
+  </Beat>
+
+  <Beat label="The opportunity">
+    <Stats
+      items={[
+        { n: '58%', l: 'of private renters in England expect to buy a home' },
+        { n: '4.1%', l: 'actually buy each year' },
+        { n: '31%', l: 'of landlords plan to sell some or all homes within two years' },
+        { n: '42 of 74', l: "lenders accept a landlord's discount to a sitting tenant" },
+      ]}
+    />
+    <p class="after">
+      Since 1 May 2026, landlords can no longer end tenancies without a reason, and a landlord who
+      evicts to sell cannot re-let for a year. Selling to the tenant is becoming the easier exit.
+    </p>
+  </Beat>
+
+  <Beat label="What we are building">
+    <p class="mid">
+      A platform that connects landlords who plan to sell with tenants who want to buy, and turns
+      rent already being paid into a discount on the home.
+    </p>
+    <ul class="lines">
+      <li>We own no homes and hold no customers' money.</li>
+      <li>The tenant pays nothing beyond market rent.</li>
+      <li>The landlord pays us, and still comes out ahead of using agents.</li>
+      <li>The sale uses a lending route that already exists, the concessionary purchase.</li>
+    </ul>
+  </Beat>
+
+  <Beat label="How we earn">
+    <IfThen
+      rows={[
+        { if: 'Tenant-finding fee', then: '£500 per letting, paid by the landlord.' },
+        { if: 'Ledger fee', then: '1.5% of rent collected, for keeping the credit record.' },
+        { if: 'Sale fee', then: '1% of the price when a tenant buys.' },
+        {
+          if: 'Mortgage introductions',
+          then: 'Possible later, if confirmed as permitted. Not in our numbers.',
+        },
+      ]}
+    />
+    <p class="after">
+      About £740 per home per year on a London reference home, assuming one in five tenants buy
+      within five years.
+    </p>
+  </Beat>
+
+  <Beat label="The numbers, honestly">
+    <div class="tbl">
+      <table>
+        <caption class="sr-only">
+          Yearly income by number of homes and share of tenants who buy
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Homes on the platform</th>
+            <th scope="col" class="r">
+              If 10% buy
+            </th>
+            <th scope="col" class="r">
+              If 20% buy
+            </th>
+            <th scope="col" class="r">
+              If 30% buy
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">50</th>
+            <td class="r">£32,000</td>
+            <td class="r">£37,000</td>
+            <td class="r">£42,000</td>
+          </tr>
+          <tr>
+            <th scope="row">300</th>
+            <td class="r">£190,000</td>
+            <td class="r">£221,000</td>
+            <td class="r">£253,000</td>
+          </tr>
+          <tr>
+            <th scope="row">1,000</th>
+            <td class="r">£632,000</td>
+            <td class="r">£738,000</td>
+            <td class="r">£843,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="after">
+      Yearly income once homes have been listed long enough for sales. No sale can happen in a
+      home's first 12 months.
+    </p>
+    <Stats
+      items={[
+        { n: '~£340k', l: 'estimated funding to reach the end of year two' },
+        { n: '350–500', l: 'homes needed to break even, on our estimates' },
+      ]}
+    />
+    <p class="after">
+      Costs are our estimates and have not yet been quoted. The share of tenants who buy is unknown
+      until the pilot measures it.
+    </p>
+  </Beat>
+
+  <Beat label="The plan">
+    <Steps
+      steps={[
+        {
+          when: 'Now',
+          what: "Legal opinion and an approach to the FCA's Innovation Pathways service.",
+        },
+        { when: 'Pilot', what: '25 to 50 homes with landlords who already use agents.' },
+        { when: 'Month 12', what: 'First tenants become able to buy. We measure who does.' },
+        { when: 'Year two', what: 'Around 300 homes.' },
+        {
+          when: 'Later',
+          what: 'An investor fund joins as a landlord, buying new homes in bulk under an independent authorised manager.',
+        },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="What could go wrong">
+    <IfThen
+      rows={[
+        {
+          if: 'Few tenants can afford to buy',
+          then: 'The credit is a few per cent of the price. We select tenants with a realistic plan and start in more affordable areas.',
+        },
+        {
+          if: 'Lenders value homes lower',
+          then: 'The discount can shrink or disappear. An independent valuation comes first.',
+        },
+        {
+          if: 'Income per home is thin',
+          then: 'About £740 a year. Costs must stay low until scale.',
+        },
+        {
+          if: 'Our reading of the rules is wrong',
+          then: 'We will not launch before a legal opinion.',
+        },
+        {
+          if: 'House prices fall',
+          then: 'We own no homes. Landlords may delay sales, which slows our sale fees.',
+        },
+      ]}
+    />
+  </Beat>
+
+  <Beat label="Next step">
+    <p class="mid">
+      If this fits what you look for, ask the person who shared this page for a conversation and the
+      full business plan.
+    </p>
+    <p class="notice">
+      This page is information for experienced investors, not an offer or invitation to invest. Any
+      investment would be made only on separate documents and after taking your own advice. All
+      figures are estimates and may not be achieved.
+    </p>
+  </Beat>
+</Base>
